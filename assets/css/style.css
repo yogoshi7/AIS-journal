@@ -1,0 +1,158 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body {
+    margin: 0;
+}
+#main {
+    height: 900px;
+    background-color: #fff;
+    margin: 0;
+}
+#header {
+    height: fit-content;
+    text-align: center;
+}
+#content {
+    margin: 15px 15px;
+    position: relative;
+}
+#request, #filter {
+    margin: 15px 25px;
+}
+#filter {
+    display: flex;
+    flex-direction: row;
+}
+#table {
+    width: 1830px;
+    margin: 20px 0 0 0;
+    padding-bottom: 70px;
+}
+#host-ip {
+    border: #fff 2px solid;
+    border-radius: 10px;
+    font-size: 25px;
+    background-color: #f2f2f2;
+}
+#filter span {
+    margin-right: 20px;
+}
+#page-selector {
+    margin: 30px 40px;
+    position: absolute;
+    bottom: 0;
+}
+#page-selector a {
+    /*font-size: 16pt;*/
+    vertical-align: middle;
+    background-color: lightgray;
+    padding: 2px 5px;
+    text-decoration: none;
+    color: #000;
+    margin: 0 5px;
+}
+#page-selector button {
+    /*font-size: 16pt;*/
+    vertical-align: middle;
+    background-color: #B5B5B5;
+    padding: 2px 5px;
+    text-decoration: none;
+    color: #000;
+    margin: 0 5px;
+    border: hidden;
+}
+#page-selector button.selected {
+    color: #FFF;
+    font-weight: bold;
+}
+#message-block {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+#delete-block {
+    text-align: center;
+    vertical-align: middle;
+}
+#message-p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+#request {
+    display: grid;
+    grid-template-columns: repeat(2, 45%);
+    gap: 100px;
+}
+#left-col {
+    height: 320px;
+    width: 900px;
+}
+#right-col {
+    height: 320px;
+    width: 900px;
+    margin-bottom: 15px;
+}
+.line {
+    margin-left: 10px;
+    height: fit-content;
+    width: 100%;
+    padding: 10px 0;
+}
+.line span {
+    display: inline-block;
+    width: 20%;
+}
+.links a {
+    border-left: #000 1px solid;
+    padding: 0 10px;
+}
+.links a:first-child {
+    border: none;
+}
+.filter {
+    flex: 1 0 auto;    
+}
+a, a:active {
+    color: #0b5394;  
+}
+button:hover {
+    cursor: pointer;
+}
+table {
+    width: 97%;
+    border-collapse: collapse;
+    margin: 0 30px;
+}
+table tr:nth-child(odd) td {
+    background-color: #d6d6d6;
+}
+td {
+    border: 1px #000 solid;
+    height: 30px;
+    min-width: 50px;
+    width: fit-content;
+}
+textarea {
+    resize: none;
+}
+input[type="submit"] {
+    width: 120px;
+    height: 30px;
+    margin: 20px 0;
+}
+button[type="submit"] {
+    width: 120px;
+    height: 30px;
+    margin: 20px 0;
+}
+button[type="button"] {
+    width: 120px;
+    height: 30px;
+    margin: 20px 0;
+}
+#left-col > p, #right-col > p {
+    font-weight: bold;
+}
+
