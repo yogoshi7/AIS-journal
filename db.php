@@ -44,8 +44,9 @@ function assemble_locations_senders_receivers_types(PDO $pdo, string $journal)
     $senders = find_all_senders($pdo, $journal);
     $receivers = find_all_receivers($pdo, $journal);
     $types = find_all_types($pdo, $journal);
+    $executors = find_all_executors($pdo, $journal);
 
-    return ['locations' => $locations, 'senders' => $senders, 'receivers' => $receivers, 'types' => $types];
+    return ['locations' => $locations, 'senders' => $senders, 'receivers' => $receivers, 'types' => $types, 'executors' => $executors];
 }
 
 /**
@@ -120,6 +121,18 @@ function find_all_sendance_dates(PDO $pdo, string $journal)
 }
 
 /**
+ * find_all_executors
+ *
+ * @param  PDO $pdo
+ * @param  string $journal
+ * @return array|false
+ */
+function find_all_executors(PDO $pdo, string $journal)
+{
+    return $pdo->query('SELECT DISTINCT executor FROM requests WHERE executor IS NOT NULL AND journal_id = '.$journal.';')->fetchAll(PDO::FETCH_COLUMN);
+}
+
+/**
  * find_all_types
  *
  * @param PDO $pdo
@@ -183,7 +196,7 @@ function delete_request(PDO $pdo, string $journal, int $requestId)
  */
 function find_request(PDO $pdo, string $journal, int $requestId)
 {
-    $selectQuery = 'SELECT location, type_id, tp.type, sendance_date, sendance_time, receive_date, receive_time, sender, receiver, content, completion_status, completion_date, completion_time
+    $selectQuery = 'SELECT location, type_id, tp.type, sendance_date, sendance_time, receive_date, receive_time, sender, receiver, content, completion_status, completion_date, executor, completion_time
     FROM requests req
     JOIN request_types tp ON tp.id = req.type_id
     WHERE req.id = :requestId and journal_id = '.$journal.'';
@@ -224,7 +237,8 @@ function find_all_requests(PDO $pdo, string $journal, int $page, string $filter 
         sendance_time,
         receive_time,
         completion_time,
-        tp.type
+        tp.type,
+        executor
         FROM requests req
         JOIN request_types tp ON tp.id = req.type_id
         WHERE journal_id = '.$journal.$filter.'
@@ -269,6 +283,7 @@ function update_journal_requests(PDO $pdo, string $journal, array $requestValues
         sender = :sender,
         completion_status = :completion_status,
         completion_date = :completion_date,
+        executor = :executor,
         completion_time = :completion_time
         WHERE id = :id and journal_id = '.$journal.'';
     
@@ -287,6 +302,7 @@ function update_journal_requests(PDO $pdo, string $journal, array $requestValues
         'completion_status' => $requestValues['completion_status'],
         'completion_date' => $requestValues['completion_date'],
         'completion_time' => $requestValues['completion_time'],
+        'executor' => $requestValues['executor'],
         'id' => $requestValues['id']
     ]);
 }
@@ -322,8 +338,8 @@ function get_request_count(PDO $pdo, string $journal, string $filter = '')
 function insert_new_request(PDO $pdo, string $journal, array $requestValues)
 {
     $query = 'INSERT INTO requests
-        (location, content, type_id, sendance_date, sendance_time, sender, receiver, receive_time, receive_date, journal_id)
-        VALUES (:location, :content, :type_id, :sendance_date, :sendance_time, :sender, :receiver, :receive_time, :receive_date, '.$journal.')';
+        (location, content, type_id, sendance_date, sendance_time, sender, receiver, receive_time, receive_date, executor, journal_id)
+        VALUES (:location, :content, :type_id, :sendance_date, :sendance_time, :sender, :receiver, :receive_time, :receive_date, :executor, '.$journal.')';
     
     $pdoStatement = $pdo->prepare($query);
     $updatedPdoStatement = bind_values($pdoStatement, $requestValues);

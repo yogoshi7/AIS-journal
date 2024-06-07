@@ -50,7 +50,7 @@ function prepare_insert_data()
     //обработка данных для добавления в БД
     foreach ($requestValues as $key => $value)
     {
-        if (($key == 'sender' || $key == 'receiver' || $key == 'location' || $key == 'content') && !preg_match(TEXT_PATTERN, $value))
+        if (($key == 'sender' || $key == 'receiver' || $key == 'location' || $key == 'content' || $key == 'executor') && !preg_match(TEXT_PATTERN, $value))
             throw new Exception("Введено недопустимое значение; допустимые символы: кириллица, цифры, знаки препинания");
         
         if (strpos($key, '-')) 

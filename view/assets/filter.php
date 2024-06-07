@@ -4,18 +4,24 @@
     <!--    <select name="sendance-date">
             <option value="0">Не выбрано</option>
         </select>-->
-        <input type="date" name="sendance-date">
+        <input type="date" name="sendance-date" max="<?=$filterData['sendance_dates']['max_date']?>" min="<?=$filterData['sendance_dates']['min_date']?>">
     </div>
     <div class="filter">
         Тема
         <select name="type-id">
             <option value="" selected="true">Не выбрано</option>
+            <?php foreach ($filterData['types'] as $type) { ?>
+            <option value="<?=$type['id']?>"><?=$type['type']?></option>
+            <?php } ?>
         </select>
     </div>
     <div class="filter">
         Расположение
         <select name="location">
             <option value="" selected="true">Не выбрано</option>
+            <?php foreach ($filterData['locations'] as $location) { ?>
+            <option value="<?=$location?>"><?=$location?></option>
+            <?php } ?>
         </select>
     </div>
     <div class="filter">
@@ -32,7 +38,7 @@
     </div>
 </div>
 <script>
-    PrintFilterValues();
+    // PrintFilterValues();
     
     const filterSelect = document.getElementById("filter-select");
     const filterClear = document.getElementById("filter-clear");

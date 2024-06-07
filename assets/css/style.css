@@ -83,6 +83,7 @@ body {
 #request {
     display: grid;
     grid-template-columns: repeat(2, 45%);
+    grid-template-rows: repeat(2, 80%);
     gap: 100px;
 }
 #left-col {

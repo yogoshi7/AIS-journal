@@ -42,11 +42,11 @@ elseif (strpos($requestURIToken, '/api/'))
                 break;
         }
     }
-    elseif ($action == 'filter')
-    {
-        require_once (__DIR__.'/models/filter_model.php');
-        get_filter_values($pdo, $table);
-    }
+    // elseif ($action == 'filter')
+    // {
+    //     require_once (__DIR__.'/models/filter_model.php');
+    //     get_filter_values($pdo, $table);
+    // }
     elseif ($action == 'pages')
     {
         require_once (__DIR__.'/models/page_model.php');
@@ -63,6 +63,9 @@ else
     }
     elseif ($entity == 'requests')
     {
+        require_once (__DIR__.'/models/filter_model.php');
+        $filterData = get_filter_values($pdo, $table);
+
         if ($action == 'edit')
         {
             $clientIp = $_SERVER['REMOTE_ADDR'];

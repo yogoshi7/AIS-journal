@@ -1,6 +1,6 @@
 <?php
 //require_once('../app.php');
-header("Content-Type: application/json");
+// header("Content-Type: application/json");
 
 
 
@@ -14,5 +14,6 @@ function get_filter_values($pdo, $table)
     //    $filterData['sendance_dates'][$key] = ['raw' => $date, 'formatted' => format_date_to_dmy($date)];
     //}
     
-    echo json_encode($filterData);
+    // echo json_encode($filterData);
+    return $filterData;
 }

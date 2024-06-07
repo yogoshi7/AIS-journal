@@ -116,6 +116,7 @@ function ToRow(request)
     const receiveDatetime = (request.receive_date !== null ? request.receive_date : "")+" "+(request.receive_time !== null ? request.receive_time : "");
     const completion = request.completion_status === "1" ? "Выполнено" : "";
     const completionDatetime = (request.completion_date !== null ? request.completion_date : "")+" "+(request.completion_time !== null ? request.completion_time : "");
+    const executor = request.executor !== null ? request.executor : "";
     
     //создает элемент ячейки таблицы для каждого поля
     const sendanceDatetimeTd = document.createElement("td");
@@ -127,6 +128,7 @@ function ToRow(request)
     const receiveDatetimeTd = document.createElement("td");
     const completionTd = document.createElement("td");
     const completionDatetimeTd = document.createElement("td");
+    const executorTd = document.createElement("td");
     
     //присваивает ячейкам соответствующие значения
     sendanceDatetimeTd.append(sendanceDatetime);
@@ -138,6 +140,7 @@ function ToRow(request)
     receiveDatetimeTd.append(receiveDatetime);
     completionTd.append(completion);
     completionDatetimeTd.append(completionDatetime);
+    executorTd.append(executor);
     
     //добавляет ячейки в конечную строку
     tr.append(sendanceDatetimeTd);
@@ -149,6 +152,7 @@ function ToRow(request)
     tr.append(receiveDatetimeTd);
     tr.append(completionTd);
     tr.append(completionDatetimeTd);
+    tr.append(executorTd);
     
     return tr;
 }
@@ -419,6 +423,7 @@ async function PrintRequestById()
         const completionStatusInput = document.getElementById("completion-checkbox");
         const completionDateInput = document.getElementsByName("completion-date")[0];
         const completionTimeInput = document.getElementsByName("completion-time")[0];
+        const executorInput = document.getElementById("executor");
         
         sendanceDateInput.value = responce.sendance_date;
         sendanceTimeInput.value = responce.sendance_time;
@@ -431,6 +436,7 @@ async function PrintRequestById()
         receiverInput.value = responce.receiver;
         completionDateInput.value = responce.completion_date;
         completionTimeInput.value = responce.completion_time;
+        executorInput.value = responce.executor;
         if (responce.completion_status === "1")
             completionStatusInput.setAttribute("checked", "true");
     }
